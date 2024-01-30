@@ -5,7 +5,7 @@ services:
     ports:
       - 13306:3306
     volumes:
-      - D:\career\wanted\dev\mysql_docker\data:/var/lib/mysql:rw
+      - C:\career\wanted\dev\mysql_docker\data:/var/lib/mysql:rw
       - D:\career\wanted\wanted-preonboarding-challenge-backend-16\src\main\resources\initdb:/docker-entrypoint-initdb.d
     command:
       - '--character-set-server=utf8mb4'
