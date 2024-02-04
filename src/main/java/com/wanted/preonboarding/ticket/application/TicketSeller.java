@@ -18,7 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TicketSeller {
     private final PerformanceRepository performanceRepository;
-    private final ReservationRepository reservationRepository;
     private long totalAmount = 0L;
 
     public List<PerformanceInfo> getAllPerformanceInfoList() {
@@ -31,23 +30,4 @@ public class TicketSeller {
     public PerformanceInfo getPerformanceInfoDetail(String name) {
         return PerformanceInfo.of(performanceRepository.findByName(name));
     }
-
-    public boolean reserve(ReserveInfo reserveInfo) {
-        log.info("reserveInfo ID => {}", reserveInfo.getPerformanceId());
-        Performance info = performanceRepository.findById(reserveInfo.getPerformanceId())
-            .orElseThrow(EntityNotFoundException::new);
-        String enableReserve = info.getIsReserve();
-        if (enableReserve.equalsIgnoreCase("enable")) {
-            // 1. 결제
-            int price = info.getPrice();
-            reserveInfo.setAmount(reserveInfo.getAmount() - price);
-            // 2. 예매 진행
-            reservationRepository.save(Reservation.of(reserveInfo));
-            return true;
-
-        } else {
-            return false;
-        }
-    }
-
 }
