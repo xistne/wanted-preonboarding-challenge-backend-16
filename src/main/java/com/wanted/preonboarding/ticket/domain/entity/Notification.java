@@ -14,17 +14,16 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PerformanceSeatInfo {
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(columnDefinition = "BINARY(16)", nullable = false, name = "performance_id")
+    @Column(nullable = false)
     private UUID performanceId;
     @Column(nullable = false)
     private int round;
-    private int gate;
-    private char line;
-    private int seat;
-    @Column(nullable = false, name = "is_reserve", columnDefinition = "varchar default 'disable'")
-    private String isReserve;
+    @Column(nullable = false)
+    private String email;
+    @Column(nullable = false, name = "is_subscribe", columnDefinition = "varchar default 'enable'")
+    private String isSubscribe;
 }
